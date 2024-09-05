@@ -32,7 +32,7 @@ This Python script automates the organization of files in a specified directory 
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/YeganeHosseini/task-manager-api.git
+   git clone git@github.com:YeganeHosseini/file-management-automation.git
    cd file-management-automation
    ```
 
