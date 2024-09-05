@@ -1,13 +1,16 @@
 
 # File Management Automation Script
 
-This Python script automates the process of organizing files in a specified directory. It categorizes files by their extensions and moves them into corresponding subfolders (e.g., "Documents", "Images", "Music"). If a file's type is unrecognized, it is moved to an "Others" folder.
+This Python script automates the organization of files in a specified directory by categorizing files based on their extensions. The script moves files into corresponding subfolders (e.g., "Documents", "Images", "Music"). Unknown file types are moved into an "Others" folder.
 
 ## Features
 
-- **Organize files by type**: Files are categorized and moved into folders like `Documents`, `Images`, `Videos`, etc.
-- **Unknown file handling**: Files with unknown extensions are moved into an `Others` folder.
+- **Organize files by type**: Files are categorized into folders like `Documents`, `Images`, `Music`, etc.
+- **Unknown file handling**: Files with unrecognized extensions are moved to an `Others` folder.
 - **Folder creation**: If a folder for a file type does not exist, it is created automatically.
+- **Logging**: The script logs all file movements and errors to a log file (`file_organizer.log`).
+- **Command-line arguments**: The directory to organize is passed as a command-line argument for flexibility.
+- **Scheduled execution**: The script can be scheduled to run periodically using Task Scheduler (Windows) or cron (Linux/macOS).
 
 ## Supported File Types
 
@@ -21,41 +24,42 @@ This Python script automates the process of organizing files in a specified dire
 
 ## Prerequisites
 
-- Python 3.x
-- (Optional) `argparse` for command-line argument support (included in `requirements.txt`).
+- **Python 3.x**: Ensure that Python 3.x is installed.
+- **argparse**: Command-line arguments support is provided by the built-in argparse library.
+- **Logging**: Built-in logging for tracking file movements.
 
 ## Installation
 
-1. **Clone the repository:**
+1. **Clone the repository**:
    ```bash
-   git clone https://github.com/YeganeHosseini/file-management-automation.git
+   git clone https://github.com/YeganeHosseini/task-manager-api.git
    cd file-management-automation
    ```
 
-2. **Set up a virtual environment (optional but recommended):**
+2. **Set up a virtual environment (optional but recommended)**:
    ```bash
    python -m venv venv
    source venv/bin/activate   # On Windows: venv\Scripts\activate
    ```
 
-3. **Install dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
+3. **Install dependencies**:
+   Since this script only uses built-in Python libraries, no additional packages are required. However, you can create a `requirements.txt` if needed for future use.
 
 ## Usage
 
-1. Run the script in your terminal:
-   ```bash
-   python file_organizer.py
-   ```
+### Run the Script with Command-Line Arguments
 
-2. Enter the full directory path that you want to organize when prompted:
-   ```bash
-   Enter the directory path to organize: C:\path\to\your\directory
-   ```
+Run the script by passing the directory to be organized as a command-line argument:
 
-3. The script will automatically move files into categorized folders.
+```bash
+python file_organizer.py /path/to/directory
+```
+
+For example:
+
+```bash
+python file_organizer.py C:\Users\yegan\Downloads
+```
 
 ### Example
 
@@ -71,14 +75,44 @@ Downloads/
 │   └── song.mp3
 ```
 
-### Future work
+### Logging
 
+All file movements and errors are logged in `file_organizer.log`. This log file records details about which files were moved and where, along with timestamps.
 
-- **Command-line arguments**: Use the `argparse` library to pass the directory as a command-line argument.
-- **Logging**: Record the actions taken by the script (i.e., which files were moved) into a `.log` file.
-- **Scheduled Execution**: Set up the script to run periodically using task schedulers like `cron` (Unix) or Task Scheduler (Windows).
+### Scheduling the Script
+
+the script can be scheduled to run periodically.
+
+#### Windows Task Scheduler
+
+1. Create a `.bat` file to automate the execution:
+   ```bat
+   @echo off
+   cd C:\path\to\your\project
+   venv\Scripts\activate
+   python file_organizer.py C:\path\to\directory
+   ```
+
+2. Open Task Scheduler, create a new task, and select the `.bat` file to run on your desired schedule (e.g., daily, weekly).
+
+#### Linux/macOS cron
+
+1. Open crontab to schedule the script:
+   ```bash
+   crontab -e
+   ```
+
+2. Add the following cron job to run the script every day at 2 AM:
+   ```bash
+   0 2 * * * /usr/bin/python3 /path/to/your/project/file_organizer.py /path/to/directory
+   ```
+
+### Optional Features
+
+- **Command-line arguments**: Use argparse to pass the directory path as an argument.
+- **Logging**: The script logs all file movements in a `.log` file.
+- **Scheduled execution**: Use Task Scheduler (Windows) or cron (Linux/macOS) to run the script periodically.
 
 ## License
 
 This project is licensed under the MIT License.
-
